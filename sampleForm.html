@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Order Tracking</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+	<style>
+      .input{
+        width: 200px;
+        margin-left: 20px;
+        margin-right: 20px;
+        display: inline;
+      }
+      #panel1, #panel2, #panel3, #panel4, #panel5, #panel6, #panel7, #panel8, #panel9, #panel10, #panel11, #panel12{
+        display: none;
+        margin-left: 100px;
+        margin-right: 100px;
+		margin-bottom: 10px;
+        padding-left: 50px;
+        padding-top: 10px;
+        background-color: rgba(225, 225, 225, 1);
+      }
+      #panel2, #panel12{
+        padding-bottom: 125px;
+      }
+	  #panel5, #panel6, #panel7, #panel8, #panel9, #panel10, #panel11, #panel12{
+		display: block;
+	  }
+    </style>
+    <script type="text/javascript">
+      function hideDiv(idElement) {
+          document.getElementById('panel' + idElement).style.display = "none";
+      }
+      function showDiv(elem){
+        for (i=1; i<3; i++) {
+          document.getElementById('panel' + i).style.display = "none";
+        }
+        if(elem.value !== 0)
+          document.getElementById('panel' + elem.value).style.display = "block";
+        
+      }
+      var number = 2;
+      function addField(idElement){
+        document.getElementById('wrapper' + idElement).innerHTML+=
+        '<p><div id="child'+ idElement + '' + number +'"><b>Option ' + number + ': </b> &nbsp;&nbsp;<input type="text" class="form-control input" id="input' + number + '" placeholder="Enter option name..."><a onclick="removeElement(&#39;wrapper' + idElement+ '&#39;, &#39;child'+ idElement + '' + number +'&#39;)" href="#">Delete (X)</a></div></p>';
+        number ++;
+      }
+      
+      var fileNum = 2;
+      function addFile(idElement){
+        document.getElementById('wrapper' + idElement).innerHTML+=
+        '<div id="child' + idElement + '' + fileNum + '"><b>Option '+ fileNum + ': </b><input type="file" style="display: inline; margin-left :30px; padding-right: 0px;"><a onclick="removeFile(&#39;wrapper' + idElement + '&#39;, &#39;child' + idElement + '' + fileNum + '&#39;)" href="#">Delete (X)</a></div>';
+        fileNum++;
+      }
+      
+      var color = 2;
+      function addColor(idElement){
+        document.getElementById('wrapper' + idElement).innerHTML+=
+        '<div id="child' + idElement + '' + color +'"><b>Option ' + color + ': </b><input type="color" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;"><a onclick="removeFile(&#39;wrapper' + idElement + '&#39;, &#39child' + idElement + '' + color + '&#39;)" href="#">Delete (X)</a></div>';
+        color++;
+      }
+      
+      function removeElement(parentDiv, childDiv){
+        if (document.getElementById(childDiv)) {     
+          var child = document.getElementById(childDiv);
+          var parent = document.getElementById(parentDiv);
+          parent.removeChild(child);
+          number--;
+        }
+        else {
+          return false;
+        }
+      }
+      function removeFile(parentDiv, childDiv){
+        if (document.getElementById(childDiv)) {     
+          var child = document.getElementById(childDiv);
+          var parent = document.getElementById(parentDiv);
+          parent.removeChild(child);
+          fileNum--;
+        }
+        else {
+          return false;
+        }
+      }
+      var option = 1;
+      function addOption(){
+        document.getElementsByClassName('array')[option].style.display = "block";
+        option++;
+      }
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="blue">
+
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="home2.html" class="simple-text">
+                    DOLLJOY
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="createAccount.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Create Client Account</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="createEmployee.html">
+                        <i class="pe-7s-users"></i>
+                        <p>Create Employee Account</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="inventory.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Inventory</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="email.html">
+                        <i class="pe-7s-mail"></i>
+                        <p>E-mail</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="orderProd.html">
+                        <i class="pe-7s-menu"></i>
+                        <p>Orders</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="formEdit.html">
+                        <i class="pe-7s-note"></i>
+                        <p>Edit Order Form</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+  
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret hidden-sm hidden-xs"></b>
+                                    <span class="notification hidden-sm hidden-xs">5</span>
+									<p class="hidden-lg hidden-md">
+										5 Notifications
+										<b class="caret"></b>
+									</p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="notifications.html">Notification 1</a></li>
+                                <li><a href="notifications.html">Notification 2</a></li>
+                                <li><a href="notifications.html">Notification 3</a></li>
+                                <li><a href="notifications.html">Notification 4</a></li>
+                                <li><a href="notifications.html">Notification 5</a></li>
+                              </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+										Website
+										<b class="caret"></b>
+									</p>
+
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="home2.html">Home</a></li>
+                                <li><a href="FAQ2.html">F.A.Q.</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="services2.html">Services</a></li>
+                                <li><a href="contact2.html">Contact</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="home.html">
+                                <p>Log out</p>
+                            </a>
+                        </li>
+						<li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 card">
+						<div class="header">
+							<h4 class="title">Edit Order Form</h4>
+                            <p class="category">Edit the order form accessed by the customers. </p>
+						</div>
+						<br>
+						<!-- CHECKBOX -->
+						<form class="form-horizontal">
+						<div class="form-group array" style="text-align: left; padding-left: 50px;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input" onchange="showDiv(this)">
+							<option value="0">Short Text Input</option>
+							<option value="0">Long Text Input</option>
+							<option value="1">Text Drop Down Menu</option>
+							<option value="3">Image Drop Down Menu</option>
+							<option value="2">Number Input</option>
+							<option value="1">Checkbox</option>
+							<option value="1">Radio Button</option>
+							<option value="0">Date and Time</option>
+							<option value="0">File Upload</option>
+							<option value="4">Color Input</option>
+						  </select>
+						  <input type="button" id = "button1" value="Edit Options" class="btn btn-primary btn-fill" onclick="displayOption(1)" style="display: none;">
+					
+						</div>
+						
+						<div id="panel1">
+						  <div class="form-group" id="wrapper1">
+							<div id="child11">
+							<b>Option 1: </b> &nbsp;&nbsp;
+							<input type="text" class="form-control input" id="input1" placeholder="Enter option name...">
+							<a onclick="removeElement('wrapper1', 'child11')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <a onclick="addField(1);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(1);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<!-- NUMBER INPUT -->
+						
+						<div id="panel2">
+						  <div class="form-group col-sm-10">
+							  <label class="col-sm-2 control-label">Minimum</label>
+							  <div class="col-sm-4">
+								<input type="number" class="form-control" min="0" max="1000000" value="0">
+							  </div>
+							  <label class="col-sm-2 control-label">Maximum</label>
+							  <div class="col-sm-4">
+								<input type="number" class="form-control" min="1" max="1000000" value="1">
+							  </div>
+							  <div class="col-sm-2" style="display: inline;">
+							  <button onclick="hideDiv(2);" class="btn btn-primary btn-fill" style="display: inline;">Hide</button>
+							  </div>
+						  </div>
+						</div>
+						
+						<!-- IMAGE -->
+						<div id="panel3">
+						  <div id="wrapper3">
+							<div id="child31">
+							<b>Option 1: </b>
+							<input type="file" style="display: inline; margin-left :30px; padding-right: 0px;">
+							<a onclick="removeFile('wrapper3', 'child31')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addFile(3);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(3);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<!-- COLOR -->
+						<div id="panel4">
+						  <div id="wrapper4">
+							<div id="child41">
+							<b>Option 1: </b>
+							<input type="color" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;">
+							<a onclick="removeFile('wrapper4', 'child41')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addColor(4);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(4);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						  <input type="button" id = "button1" value="Edit Options" class="btn btn-primary btn-fill" onclick="displayOption(1)" style="display: none;">
+					
+						</div>
+						
+						<div id="panel5">
+						  <div class="form-group" id="wrapper5">
+							<div id="child51">
+							<b>Option 1: </b> &nbsp;&nbsp;
+							<input type="text" class="form-control input" id="input1" placeholder="Enter option name...">
+							<a onclick="removeElement('wrapper5', 'child51')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <a onclick="addField(5);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(5);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel9">
+						  <div id="wrapper9">
+							<div id="child91">
+							<b>Option 1: </b>
+							<input type="file" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;">
+							<a onclick="removeFile('wrapper9', 'child91')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addFile(9);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(9);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Color Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel10">
+						  <div id="wrapper10">
+							<div id="child101">
+							<b>Option 1: </b>
+							<input type="color" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;">
+							<a onclick="removeFile('wrapper10', 'child101')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addColor(10);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(10);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Color Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+							<option>Color Input</option>
+						  </select>
+						</div>
+						
+						<div id="panel11">
+						  <div id="wrapper11">
+							<div id="child111">
+							<b>Option 1: </b>
+							<input type="color" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;">
+							<a onclick="removeFile('wrapper11', 'child111')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addColor(11);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(11);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Color Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel6">
+						  <div id="wrapper6">
+							<div id="child61">
+							<b>Option 1: </b>
+							<input type="color" style="display: inline; margin-left :30px; margin-right: 30px; width: 100px;">
+							<a onclick="removeFile('wrapper6', 'child61')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addColor(6);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(6);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel7">
+						  <div id="wrapper7">
+							<div id="child71">
+							<b>Option 1: </b>
+							<input type="file" style="display: inline; margin-left :30px; padding-right: 0px;">
+							<a onclick="removeFile('wrapper7', 'child71')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addFile(7);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(7);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel8">
+						  <div id="wrapper8">
+							<div id="child81">
+							<b>Option 1: </b>
+							<input type="file" style="display: inline; margin-left :30px; padding-right: 0px;">
+							<a onclick="removeFile('wrapper8', 'child81')" href="#">Delete (X)</a>
+							</div>
+						  </div>
+						  <br>
+						  <a onclick="addFile(8);" href="#">Add more options...</a>
+						  <br><br>
+						  <button onclick="hideDiv(8);" class="btn btn-primary btn-fill">Hide</button>
+						  <br><br>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						<div id="panel12">
+						  <div class="form-group col-sm-10">
+							  <label class="col-sm-2 control-label"><b>Minimum</b></label>
+							  <div class="col-sm-4">
+								<input type="number" class="form-control" min="0" max="1000000" value="0">
+							  </div>
+							  <label class="col-sm-2 control-label"><b>Maximum</b></label>
+							  <div class="col-sm-4">
+								<input type="number" class="form-control" min="1" max="1000000" value="1">
+							  </div>
+							  <div class="col-sm-2" style="display: inline;">
+							  <button onclick="hideDiv(12);" class="btn btn-primary btn-fill" style="display: inline;">Hide</button>
+							  </div>
+						  </div>
+						</div>
+						<br>
+						
+						<div class="form-group" style="text-align: left; padding-left: 50px; display: block;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input">
+							<option>Short Text Input</option>
+							<option>Long Text Input</option>
+							<option>Text Drop Down Menu</option>
+							<option>Image Drop Down Menu</option>
+							<option>Number Input</option>
+							<option>Checkbox</option>
+							<option>Radio Button</option>
+							<option>Date and Time</option>
+							<option>File Upload</option>
+						  </select>
+						</div>
+						
+						
+						
+						
+						
+						<!-- mga dagdag na inputs na to -->
+						<!-- mga dagdag na inputs na to -->
+						<!-- mga dagdag na inputs na to -->
+						
+						<div class="form-group array" style="text-align: left; padding-left: 50px; display: none;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input" onchange="showDiv(this)">
+							<option value="0">Short Text Input</option>
+							<option value="0">Long Text Input</option>
+							<option value="1">Text Drop Down Menu</option>
+							<option value="3">Image Drop Down Menu</option>
+							<option value="2">Number Input</option>
+							<option value="1">Checkbox</option>
+							<option value="1">Radio Button</option>
+							<option value="0">Date and Time</option>
+							<option value="0">File Upload</option>
+						  </select>
+						  <input type="button" id = "button1" value="Edit Options" class="btn btn-primary btn-fill" onclick="displayOption(1)" style="display: none;">
+					
+						</div>
+						
+						<div class="form-group array" style="text-align: left; padding-left: 50px; display: none;">
+						  
+						  <input type="checkbox" checked="checked">
+						  <b style="margin-left: 20px;">Name of Input</b>
+						  <input type="text" class="form-control input" id="input1" placeholder="Enter input field name...">
+						  <b>Type of Input</b>
+						  <select class="form-control input" onchange="showDiv(this)">
+							<option value="0">Short Text Input</option>
+							<option value="0">Long Text Input</option>
+							<option value="1">Text Drop Down Menu</option>
+							<option value="3">Image Drop Down Menu</option>
+							<option value="2">Number Input</option>
+							<option value="1">Checkbox</option>
+							<option value="1">Radio Button</option>
+							<option value="0">Date and Time</option>
+							<option value="0">File Upload</option>
+						  </select>
+						  <input type="button" id = "button1" value="Edit Options" class="btn btn-primary btn-fill" onclick="displayOption(1)" style="display: none;">
+					
+						</div>
+						
+						</form>
+						<br>
+						&emsp;&emsp;&emsp;&emsp;&emsp;
+						<a href="#" onclick="addOption();">Add more inputs...</a>
+						
+						<br><br>
+						<button type="submit" class="btn btn-primary btn-fill">SAVE CHANGES</button>
+						<button class="btn btn-primary btn-fill pull-right">BACK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="home2.html">Dolljoy</a>, designed by Before You Exit
+                </p>
+            </div>
+        </footer>
+
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+
+	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+	<script src="assets/js/demo.js"></script>
+
+
+</html>
